@@ -15,7 +15,7 @@ const loadFile = (event) => {
     const products = data.products;
     renderProducts(products);
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
 
@@ -26,12 +26,14 @@ const getValue = (key, value) => {
 
 const renderProducts = (products) => {
   products.forEach((product) => {
-    const card = document.createElement('div');
-    card.classList.add('card');
+    const card = Object.assign(document.createElement('div'), {
+      className: 'card',
+    });
     Object.entries(product).forEach(([key, value]) => {
       const line = document.createElement('p');
-      const title = document.createElement('span');
-      title.classList.add('card-title');
+      const title = Object.assign(document.createElement('span'), {
+        className: 'card-title',
+      });
       const text = document.createElement('span');
       title.textContent = `${key}: `;
       value = getValue(key, value);
