@@ -4,24 +4,42 @@ const allProducts = document.getElementById('products');
 fileInput.onchange = (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
-
-  reader.onload = () => {
-    let data = reader.result;
-    data = JSON.parse(data);
-    let products = data.products;
-
-    products = products.map(
-      (product) =>
-        `<div class="card">
-        <p><strong>Name:</strong> ${product.name}</p>
-        <p><strong>Description:</strong> ${product.description}</p>
-        <p><strong>Price:</strong> ${product.price}₪</p>
-        <p><strong>seller:</strong> ${product.seller}</p>
-        </div>`,
-    );
-    products = products.join('');
-    allProducts.innerHTML = products;
-  };
-
+  reader.onload = loadFile;
   reader.readAsText(file);
+};
+
+const loadFile = (event) => {
+  try {
+    let data = event.target.result;
+    data = JSON.parse(data);
+    const products = data.products;
+    renderProducts(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getValue = (key, value) => {
+  const displayValue = key == `price` ? `${value} ₪` : value;
+  return displayValue;
+};
+
+const renderProducts = (products) => {
+  products.forEach((product) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    Object.entries(product).forEach(([key, value]) => {
+      const line = document.createElement('p');
+      const title = document.createElement('span');
+      title.classList.add('card-title');
+      const text = document.createElement('span');
+      title.textContent = `${key}: `;
+      value = getValue(key, value);
+      text.textContent = value;
+      line.appendChild(title);
+      line.appendChild(text);
+      card.appendChild(line);
+    });
+    allProducts.appendChild(card);
+  });
 };
