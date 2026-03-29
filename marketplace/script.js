@@ -9,14 +9,17 @@ fileInput.onchange = (event) => {
 };
 
 const loadFile = (event) => {
+  let products;
   try {
     let data = event.target.result;
-    data = JSON.parse(data);
-    const products = data.products;
-    renderProducts(products);
+    const jsonData = JSON.parse(data);
+    products = jsonData.products;
   } catch (error) {
     alert('Invalid JSON file. Please check the file');
+    return;
   }
+  allProducts.innerHTML = '';
+  renderProducts(products);
 };
 
 const getValue = (key, value) => {
@@ -25,21 +28,25 @@ const getValue = (key, value) => {
 };
 
 const renderProducts = (products) => {
-  products.forEach((product) => {
-    document.body.appendChild(document.createElement('div')).className = 'card';
-    const card = document.body.lastElementChild;
-    Object.entries(product).forEach(([key, value]) => {
-      const line = document.createElement('p');
-      const title = document.createElement('span');
-      title.classList.add('card-title');
-      const text = document.createElement('span');
-      title.textContent = `${key}: `;
-      value = getValue(key, value);
-      text.textContent = value;
-      line.appendChild(title);
-      line.appendChild(text);
-      card.appendChild(line);
+  try {
+    products.forEach((product) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      Object.entries(product).forEach(([key, value]) => {
+        const line = document.createElement('p');
+        const title = document.createElement('span');
+        title.classList.add('card-title');
+        const text = document.createElement('span');
+        title.textContent = `${key}: `;
+        const displayValue = getValue(key, value);
+        text.textContent = displayValue;
+        line.appendChild(title);
+        line.appendChild(text);
+        card.appendChild(line);
+      });
+      allProducts.appendChild(card);
     });
-    allProducts.appendChild(card);
-  });
+  } catch (error) {
+    alert('Invalid products data. Please check the file');
+  }
 };
