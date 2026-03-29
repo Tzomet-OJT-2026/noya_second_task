@@ -1,5 +1,20 @@
+const START_BALANCE = 100;
 const fileInput = document.getElementById('file-input');
 const allProducts = document.getElementById('products');
+
+window.onload = () => {
+  let balance = localStorage.getItem('balance');
+  if (!balance) {
+    setBalance(START_BALANCE);
+  }
+  setBalance(balance);
+};
+
+const setBalance = (balance) => {
+  localStorage.setItem('balance', balance);
+  const balanceView = document.getElementById('balance-value');
+  balanceView.textContent = `${balance}₪`;
+};
 
 fileInput.onchange = (event) => {
   const file = event.target.files[0];
@@ -44,9 +59,26 @@ const renderProducts = (products) => {
         line.appendChild(text);
         card.appendChild(line);
       });
+      card.onclick = () => buyItem(product);
       allProducts.appendChild(card);
     });
   } catch (error) {
     alert('Invalid products data. Please check the file');
+  }
+};
+
+const buyItem = (product) => {
+  const balance = localStorage.getItem('balance');
+  const itemPrice = product.price;
+  if (!itemPrice) {
+    alert('Failed to complete purchase: Invalid product information');
+    return;
+  }
+  const newBalance = balance - itemPrice;
+  if (newBalance >= 0) {
+    setBalance(newBalance);
+    alert('Purchased successfully');
+  } else {
+    alert('There is not enough balance to purchase the product');
   }
 };

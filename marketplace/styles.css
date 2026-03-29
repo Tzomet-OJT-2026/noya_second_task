@@ -105,10 +105,26 @@ h1 {
 }
 
 .upload-btn:hover .icon-folder {
-  transform: rotate(15sdeg);
+  transform: rotate(15deg);
   transition: 0.3s;
 }
 
 .btn-text {
   padding: 10px;
+}
+
+.balance {
+  color: #007bff;
+  font-weight: bold;
+  font-size: 30px;
+  display: inline-flex;
+  margin-right: 20px;
+  border-bottom: 3px solid #007bff;
+  line-height: 0.1;
+  gap: 15px;
+}
+
+.balance:hover {
+  color: #5dabff;
+  border-color: #5dabff;
 }
