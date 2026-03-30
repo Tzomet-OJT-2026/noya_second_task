@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Marketplace</h1>
+    <div class="balance">
+      <p id="balance-title">Balance:</p>
+      <p id="balance-value"></p>
+    </div>
+    <label for="file-input" class="upload-btn">
+      <span class="icon-folder">📁</span>
+      <span class="btn-text">Select a JSON file</span>
+    </label>
+    <input type="file" id="file-input" accept=".json" hidden />
+    <div id="products"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
