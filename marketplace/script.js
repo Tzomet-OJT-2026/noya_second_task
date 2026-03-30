@@ -6,6 +6,7 @@ window.onload = () => {
   let balance = localStorage.getItem('balance');
   if (!balance) {
     setBalance(START_BALANCE);
+    return;
   }
   setBalance(balance);
 };
@@ -43,8 +44,12 @@ const getValue = (key, value) => {
 };
 
 const renderProducts = (products) => {
-  try {
-    products.forEach((product) => {
+  if (!Array.isArray(products)) {
+    alert('Error: Products data is not a valid list.');
+    return;
+  }
+  products.forEach((product) => {
+    try {
       const card = document.createElement('div');
       card.className = 'card';
       Object.entries(product).forEach(([key, value]) => {
@@ -61,24 +66,24 @@ const renderProducts = (products) => {
       });
       card.onclick = () => buyItem(product);
       allProducts.appendChild(card);
-    });
-  } catch (error) {
-    alert('Invalid products data. Please check the file');
-  }
+    } catch (error) {
+      alert('Error: A product have invalid data and will not be displayed.');
+    }
+  });
 };
 
 const buyItem = (product) => {
   const balance = localStorage.getItem('balance');
-  const itemPrice = product.price;
+  const itemPrice = Number(product.price);
   if (!itemPrice) {
     alert('Failed to complete purchase: Invalid product information');
     return;
   }
   const newBalance = balance - itemPrice;
-  if (newBalance >= 0) {
-    setBalance(newBalance);
-    alert('Purchased successfully');
-  } else {
+  if (newBalance < 0) {
     alert('There is not enough balance to purchase the product');
+    return;
   }
+  setBalance(newBalance);
+  alert('Purchased successfully');
 };

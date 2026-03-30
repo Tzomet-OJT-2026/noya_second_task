@@ -3,6 +3,7 @@
     {
       "name": "desk",
       "description": "Small white desk",
+      "price": 300,
       "seller": "noya"
     },
     {
