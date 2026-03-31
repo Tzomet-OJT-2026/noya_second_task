@@ -53,16 +53,11 @@ const renderProducts = (products) => {
       const card = document.createElement('div');
       card.className = 'card';
       Object.entries(product).forEach(([key, value]) => {
-        const line = document.createElement('p');
-        const title = document.createElement('span');
-        title.classList.add('card-title');
         const text = document.createElement('span');
-        title.textContent = `${key}: `;
         const displayValue = getValue(key, value);
         text.textContent = displayValue;
-        line.appendChild(title);
-        line.appendChild(text);
-        card.appendChild(line);
+        text.id = key;
+        card.appendChild(text);
       });
       card.onclick = () => buyItem(product);
       allProducts.appendChild(card);
