@@ -1,0 +1,156 @@
+html {
+  font-family: 'Segoe UI';
+  text-align: center;
+  color: #1d1d1d;
+  background-color: #f0f4f8;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  color: #00417d;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.balance {
+  height: min-content;
+  color: #007bff;
+  font-weight: bold;
+  font-size: 22px;
+  display: inline-flex;
+  border-bottom: 3px solid #007bff;
+  line-height: 0.1;
+  gap: 10px;
+}
+
+.balance:hover {
+  color: #5dabff;
+  border-color: #5dabff;
+}
+
+.folder-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.upload-btn {
+  background-color: #ffc300;
+  color: #001d3d;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-btn:hover {
+  background-color: #ffd60a;
+}
+
+.upload-btn:active {
+  background-color: #003566;
+  color: white;
+  transform: scale(0.95);
+}
+
+.icon-folder {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.upload-btn:hover .icon-folder {
+  transform: rotate(15deg);
+  transition: 0.3s;
+}
+
+.btn-text {
+  padding: 10px;
+}
+
+#products:empty {
+  display: none;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 90%;
+  justify-content: center;
+  padding: 20px;
+  margin: 60px auto;
+  border: 3px solid #003566;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 53, 102, 0.1);
+  background-color: #ffffff;
+}
+
+.card {
+  width: 250px;
+  margin: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 53, 102, 0.1);
+  text-align: right;
+  flex-direction: row;
+  direction: rtl;
+  transition:
+    transform 0.3s ease,
+    scale 0.3s ease,
+    box-shadow 0.5s ease;
+  background-color: #f8fbff;
+  border-right: 5px solid #00b4d8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  scale: 1.1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#name {
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+}
+
+#description {
+  font-size: 15px;
+  width: 100%;
+}
+
+#price {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#seller {
+  font-size: 15px;
+  text-align: right;
+  padding-right: 5px;
+}
